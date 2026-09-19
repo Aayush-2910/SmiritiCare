@@ -1,5 +1,0 @@
-import React from 'react';
-import { QuizGame } from './shared.jsx';
-import { images } from '../data/images.js';
-const questions=[{question:'Who is this familiar face?',image:images.rahul,portrait:true,options:['Rahul','Anita','Arjun','Sunita'],correct:0,context:'A little hint: your son, who loves those walks by the sea.'},{question:'Who has come to say hello?',image:images.anita,portrait:true,options:['Meera','Sunita','Anita','Rahul'],correct:2,context:'A little hint: your daughter, who makes tea with you on Sundays.'},{question:'And who is this lovely person?',image:images.sunita,portrait:true,options:['Anita','Sunita','Arjun','Rahul'],correct:1,context:'A little hint: your sister, and your childhood garden companion.'}];
-export default function WhoIsThis({onComplete}){return <QuizGame questions={questions} onComplete={onComplete}/>;}
