@@ -1,0 +1,2 @@
+import { images } from './images.js';
+export const users = { senior: { name: 'Meera', fullName: 'Meera Sharma', email: 'senior@smriticare.demo', age: 68, photo: images.meera, role: 'senior' }, family: { name: 'Rahul', fullName: 'Rahul Sharma', email: 'family@smriticare.demo', photo: images.rahul, role: 'family' } };
