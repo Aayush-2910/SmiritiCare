@@ -1,17 +1,164 @@
-import './styles.js';
-import React, { useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import { HashRouter, Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
-import { MotionConfig, AnimatePresence, motion } from 'framer-motion';
-import { StoreProvider, useStore } from './store/state.jsx';
-import { ModalHost, ToastHost, ErrorBoundary, Button, Icon } from './components/common/ui.jsx';
-import AppShell from './components/layout/AppShell.jsx';
-import { Landing, AuthPage } from './pages/Public.jsx';
-import { Dashboard } from './features/dashboard/Dashboard.jsx';
-import { MemoriesPage, MemoryRoute, FamilyPage, GameHub, GardenPage, JourneyPage, AchievementsPage, ProfilePage, SettingsPage } from './features/collections/CollectionPages.jsx';
-import { MessagesPage, RemindersPage } from './features/everyday/EverydayPages.jsx';
-import GamePage from './features/games/GamePage.jsx';
-function WelcomeSeed(){const{data}=useStore();const[show,setShow]=useState(()=>{try{return !sessionStorage.getItem('smriticare-welcome')&&location.hash.length<3;}catch{return false;}});useEffect(()=>{if(!show)return;try{sessionStorage.setItem('smriticare-welcome','seen');}catch{}const timer=setTimeout(()=>setShow(false),1500);return()=>clearTimeout(timer);},[show]);return <AnimatePresence>{show&&!data.settings.motion&&<motion.div className="brand-intro" initial={{opacity:1}} exit={{opacity:0}} transition={{duration:.3}}><div className="seed-animation"><span>🌱</span><span>🌿</span><span>🌸</span></div><h2>SmritiCare</h2><p>Good things start small.</p><button className="text-link" onClick={()=>setShow(false)}>Come on in <Icon name="ArrowRight" size={16}/></button></motion.div>}</AnimatePresence>;}
-function RouteTitle(){const location=useLocation();useEffect(()=>{const segment=location.pathname.split('/').filter(Boolean).pop()||'Welcome';document.title=`${segment.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())} · SmritiCare`;},[location]);return null;}
-function Application(){const{data}=useStore();return <MotionConfig reducedMotion={data.settings.motion?'always':'user'}><HashRouter future={{v7_startTransition:true,v7_relativeSplatPath:true}}><RouteTitle/><Routes><Route path="/" element={<Landing/>}/>{['about','features','how-it-works','games-preview','family-connection','memory-garden','accessibility','contact'].map(path=><Route key={path} path={`/${path}`} element={<Landing/>}/>)}<Route path="/login" element={<AuthPage/>}/><Route path="/signup" element={<AuthPage/>}/><Route path="/app" element={<AppShell/>}><Route index element={<Navigate to="home" replace/>}/><Route path="home" element={<Dashboard/>}/><Route path="journey" element={<JourneyPage/>}/><Route path="games" element={<GameHub/>}/><Route path="games/:gameId" element={<GamePage/>}/><Route path="memories" element={<MemoriesPage/>}/><Route path="memories/:id" element={<MemoryRoute/>}/><Route path="family" element={<FamilyPage/>}/><Route path="messages" element={<MessagesPage/>}/><Route path="garden" element={<GardenPage/>}/><Route path="reminders" element={<RemindersPage/>}/><Route path="achievements" element={<AchievementsPage/>}/><Route path="profile" element={<ProfilePage/>}/><Route path="settings" element={<SettingsPage/>}/></Route><Route path="/family" element={<AppShell/>}><Route index element={<Dashboard family/>}/><Route path="journey" element={<JourneyPage/>}/><Route path="memories" element={<MemoriesPage/>}/><Route path="challenges" element={<FamilyPage/>}/></Route><Route path="*" element={<main className="initial-loading"><span>🌿</span><h1>A little off the garden path.</h1><p>Let’s find our way back to something lovely.</p><Button to="/">Back to SmritiCare</Button></main>}/></Routes><ModalHost/><ToastHost/><WelcomeSeed/></HashRouter></MotionConfig>;}
-createRoot(document.getElementById('root')).render(<ErrorBoundary><StoreProvider><Application/></StoreProvider></ErrorBoundary>);
+import "./styles.js";
+import React, { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  HashRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  Link,
+} from "react-router-dom";
+import { MotionConfig, AnimatePresence, motion } from "framer-motion";
+import { StoreProvider, useStore } from "./store/state.jsx";
+import {
+  ModalHost,
+  ToastHost,
+  ErrorBoundary,
+  Button,
+  Icon,
+} from "./components/common/ui.jsx";
+import AppShell from "./components/layout/AppShell.jsx";
+import { Landing, AuthPage } from "./pages/Public.jsx";
+import { Dashboard } from "./features/dashboard/Dashboard.jsx";
+import {
+  MemoriesPage,
+  MemoryRoute,
+  FamilyPage,
+  GameHub,
+  GardenPage,
+  JourneyPage,
+  AchievementsPage,
+  ProfilePage,
+  SettingsPage,
+} from "./features/collections/CollectionPages.jsx";
+import {
+  MessagesPage,
+  RemindersPage,
+} from "./features/everyday/EverydayPages.jsx";
+import GamePage from "./features/games/GamePage.jsx";
+function WelcomeSeed() {
+  const { data } = useStore();
+  const [show, setShow] = useState(() => {
+    try {
+      return (
+        !sessionStorage.getItem("smriticare-welcome") &&
+        location.hash.length < 3
+      );
+    } catch {
+      return false;
+    }
+  });
+  useEffect(() => {
+    if (!show) return;
+    try {
+      sessionStorage.setItem("smriticare-welcome", "seen");
+    } catch {}
+    const timer = setTimeout(() => setShow(false), 2500);
+    return () => clearTimeout(timer);
+  }, [show]);
+  return (
+    <AnimatePresence>
+      {show && !data.settings.motion && (
+        <motion.div
+          className="brand-intro"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="seed-animation">
+            <span>🌱</span>
+            <span>🌿</span>
+            <span>🌸</span>
+          </div>
+          <h2>SmritiCare</h2>
+          <p>Good things start small.</p>
+          <button className="text-link" onClick={() => setShow(false)}>
+            Come on in <Icon name="ArrowRight" size={16} />
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+function RouteTitle() {
+  const location = useLocation();
+  useEffect(() => {
+    const segment =
+      location.pathname.split("/").filter(Boolean).pop() || "Welcome";
+    document.title = `${segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())} · SmritiCare`;
+  }, [location]);
+  return null;
+}
+function Application() {
+  const { data } = useStore();
+  return (
+    <MotionConfig reducedMotion={data.settings.motion ? "always" : "user"}>
+      <HashRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
+        <RouteTitle />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          {[
+            "about",
+            "features",
+            "how-it-works",
+            "games-preview",
+            "family-connection",
+            "memory-garden",
+            "accessibility",
+            "contact",
+          ].map((path) => (
+            <Route key={path} path={`/${path}`} element={<Landing />} />
+          ))}
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/signup" element={<AuthPage />} />
+          <Route path="/app" element={<AppShell />}>
+            <Route index element={<Navigate to="home" replace />} />
+            <Route path="home" element={<Dashboard />} />
+            <Route path="journey" element={<JourneyPage />} />
+            <Route path="games" element={<GameHub />} />
+            <Route path="games/:gameId" element={<GamePage />} />
+            <Route path="memories" element={<MemoriesPage />} />
+            <Route path="memories/:id" element={<MemoryRoute />} />
+            <Route path="family" element={<FamilyPage />} />
+            <Route path="messages" element={<MessagesPage />} />
+            <Route path="garden" element={<GardenPage />} />
+            <Route path="reminders" element={<RemindersPage />} />
+            <Route path="achievements" element={<AchievementsPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="settings" element={<SettingsPage />} />
+          </Route>
+          <Route path="/family" element={<AppShell />}>
+            <Route index element={<Dashboard family />} />
+            <Route path="journey" element={<JourneyPage />} />
+            <Route path="memories" element={<MemoriesPage />} />
+            <Route path="challenges" element={<FamilyPage />} />
+          </Route>
+          <Route
+            path="*"
+            element={
+              <main className="initial-loading">
+                <span>🌿</span>
+                <h1>A little off the garden path.</h1>
+                <p>Let’s find our way back to something lovely.</p>
+                <Button to="/">Back to SmritiCare</Button>
+              </main>
+            }
+          />
+        </Routes>
+        <ModalHost />
+        <ToastHost />
+        <WelcomeSeed />
+      </HashRouter>
+    </MotionConfig>
+  );
+}
+createRoot(document.getElementById("root")).render(
+  <ErrorBoundary>
+    <StoreProvider>
+      <Application />
+    </StoreProvider>
+  </ErrorBoundary>,
+);
