@@ -15,23 +15,40 @@ import GardenScene, { GameArt } from "../components/shared/GardenScene.jsx";
 import { useStore } from "../store/state.jsx";
 import { games } from "../data/games.js";
 import { images } from "../data/images.js";
-import LandingAICompanion from "../components/shared/LandingAICompanion";
+import PremiumHeroVideo from "../components/shared/PremiumHeroVideo";
 import ReassuranceStrip from "../components/shared/ReassuranceStrip";
-import PremiumBenefits from "../components/shared/PremiumBenefits";
+import PremiumAbout from "../components/shared/PremiumAbout";
 import PremiumHowItWorks from "../components/shared/PremiumHowItWorks";
+import PremiumPricing from "../components/shared/PremiumPricing";
+import PremiumStories from "../components/shared/PremiumStories";
+import PremiumFaq from "../components/shared/PremiumFaq";
+import PremiumFinalCta from "../components/shared/PremiumFinalCta";
 
 const navItems = [
   ["About", "/about"],
   ["How it works", "/how-it-works"],
   ["Our games", "/games-preview"],
   ["For families", "/family-connection"],
+  ["Pricing", "/pricing"],
 ];
 function PublicNav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   useEffect(() => setOpen(false), [location]);
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
-    <header className="public-header">
+    <header
+      className={
+        scrolled ? "public-header is-scrolled" : "public-header"
+      }
+    >
       <div className="container public-nav">
         <Logo />
         <nav
@@ -74,6 +91,7 @@ const sectionRoutes = {
   "/features": "features",
   "/games-preview": "games-preview",
   "/family-connection": "family-connection",
+  "/pricing": "pricing",
   "/memory-garden": "memory-garden",
   "/accessibility": "accessibility",
   "/contact": "contact",
@@ -97,14 +115,11 @@ export function Landing() {
     <div className="public-site">
       <PublicNav />
       <main>
-        {/* Landing hero replaced with the new AI companion experience.
-            The original hero markup has been preserved for easy restoration
-            (see LegacyLandingHero.jsx / git history). No other section below
-            was changed. */}
-        <LandingAICompanion />
+        {/* Premium cinematic video hero. The legacy 3D bot hero was removed. */}
+        <PremiumHeroVideo />
 
         <ReassuranceStrip />
-        <PremiumBenefits />
+        <PremiumAbout />
         <PremiumHowItWorks />
         <section className="section container" id="games-preview">
           <div className="section-heading horizontal">
@@ -218,6 +233,7 @@ export function Landing() {
             </div>
           </div>
         </section>
+        <PremiumPricing />
         <section
           className="section container garden-feature"
           id="memory-garden"
@@ -299,126 +315,9 @@ export function Landing() {
             </div>
           </div>
         </section>
-        <section className="section container" id="testimonials">
-          <div className="section-heading centered">
-            <p className="eyebrow">STORIES & LITTLE MOMENTS</p>
-            <h2>It’s the little things that stay with us.</h2>
-            <p>
-              A glimpse of what connection could feel like.{" "}
-              <span className="demo-label">Illustrative demo stories</span>
-            </p>
-          </div>
-          <Carousel
-            label="family stories"
-            items={[
-              {
-                id: 1,
-                quote:
-                  "It’s become my little morning ritual. A cup of tea, a memory game, and a peek at what the grandchildren have shared.",
-                name: "Meera",
-                detail: "Finding joy in the everyday",
-                photo: images.sunita,
-              },
-              {
-                id: 2,
-                quote:
-                  "We live in different cities, but sharing a photo from our old albums makes it feel like we’re back at the same table.",
-                name: "Rahul",
-                detail: "A little closer, even from afar",
-                photo: images.rahul,
-              },
-              {
-                id: 3,
-                quote:
-                  "Mum doesn’t call them activities. She says she’s going to visit her garden. That makes me smile every time.",
-                name: "Anita",
-                detail: "Growing together as a family",
-                photo: images.anita,
-              },
-            ]}
-            renderItem={(s) => (
-              <article className="testimonial">
-                <span className="quote-mark">“</span>
-                <blockquote>{s.quote}</blockquote>
-                <div>
-                  <Avatar src={s.photo} name={s.name} />
-                  <span>
-                    <strong>{s.name}</strong>
-                    <small>{s.detail}</small>
-                  </span>
-                </div>
-              </article>
-            )}
-          />
-        </section>
-        <section className="faq-section container" id="faq">
-          <div>
-            <p className="eyebrow">A FEW THINGS YOU MIGHT WONDER</p>
-            <h2>
-              A little clarity,
-              <br />
-              before you begin.
-            </h2>
-            <p>Something else on your mind?</p>
-            <button
-              className="text-link"
-              onClick={() =>
-                setModal({
-                  title: "We’re happy to hear from you",
-                  content: <ContactForm />,
-                })
-              }
-            >
-              Let’s have a conversation <Icon name="ArrowUpRight" size={17} />
-            </button>
-          </div>
-          <div className="faq-list">
-            {[
-              [
-                "Who is SmritiCare for?",
-                "For older adults and the people who love them—and anyone who enjoys gentle memory activities, family stories, and small daily routines.",
-              ],
-              [
-                "Do I need to be good with technology?",
-                "Not at all. Large buttons, simple words, adjustable text, and a gentle pace help you feel at home. Explore with a demo account and take your time.",
-              ],
-              [
-                "Is SmritiCare a medical or diagnostic tool?",
-                "No. SmritiCare is designed for mental engagement and family connection. Games and progress are not medical assessments, and cannot diagnose or treat any condition.",
-              ],
-              [
-                "How can my family take part?",
-                "Choose the Family demo account to share memories, send messages, and create challenges. In this prototype, the Senior and Family accounts share data on this browser only.",
-              ],
-              [
-                "Are my memories private?",
-                "This is a frontend demo. Changes are stored in this browser, with no cloud storage or real authentication. Please use sample content, not sensitive personal information.",
-              ],
-              [
-                "Can I try it without signing up?",
-                "Absolutely. Choose Continue as Demo User, or open any game preview. There is no payment and no real account is created.",
-              ],
-            ].map(([q, a]) => (
-              <details key={q}>
-                <summary>
-                  {q}
-                  <Icon name="Plus" size={18} />
-                </summary>
-                <p>{a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-        <section className="final-cta container">
-          <span className="cta-leaf">🌿</span>
-          <p className="eyebrow">YOUR NEXT CHAPTER STARTS SMALL</p>
-          <h2>Start growing your memory garden.</h2>
-          <p>A familiar face. A little game. A moment just for you.</p>
-          <Button to="/login">
-            Let’s begin, together <Icon name="ArrowRight" size={18} />
-          </Button>
-          <span className="cta-note">At your pace. With a little care.</span>
-        </section>
+        <PremiumStories />
+        <PremiumFaq />
+        <PremiumFinalCta />
       </main>
       <Footer />
     </div>
@@ -443,6 +342,7 @@ function Footer() {
           <Link to="/about">Our story</Link>
           <Link to="/how-it-works">How it works</Link>
           <Link to="/games-preview">Our games</Link>
+          <Link to="/pricing">Pricing & plans</Link>
           <Link to="/memory-garden">Memory Garden</Link>
         </div>
         <div>

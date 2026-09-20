@@ -1,40 +1,416 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useStore } from '../../store/state.jsx';
-import { Icon, Button } from '../common/ui.jsx';
-export default function GardenScene({hero=false,large=false}){
- const{data,setModal}=useStore();const count=data.completed.length;const blooms=hero?7:Math.min(12,2+count);const reduced=data.settings.motion;
- function inspect(title,text){if(hero)return;setModal({title,content:<div className="garden-discovery"><span>🌿</span><p>{text}</p><Button onClick={()=>setModal(null)}>Lovely</Button></div>});}
- const interactive=(title,text)=>({role:hero?undefined:'button',tabIndex:hero?undefined:0,'aria-label':title,onClick:()=>inspect(title,text),onKeyDown:e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();inspect(title,text);}}});
- return <div className={`garden-scene ${large?'large':''} ${hero?'hero-garden':''}`}><svg viewBox="0 0 720 530" role="img" aria-label="Your peaceful memory garden, with a leafy tree, flowers, a little home, and a pond">
- <defs><linearGradient id="sky" x2="0" y2="1"><stop stopColor="#f1f3dc"/><stop offset="1" stopColor="#e3eddc"/></linearGradient><linearGradient id="hill" x2="0" y2="1"><stop stopColor="#b9cf9f"/><stop offset="1" stopColor="#99b980"/></linearGradient><linearGradient id="treegreen" x2=".7" y2="1"><stop stopColor="#91b06e"/><stop offset="1" stopColor="#567b43"/></linearGradient><filter id="softshadow"><feDropShadow dx="0" dy="7" stdDeviation="7" floodColor="#4b6735" floodOpacity=".15"/></filter><pattern id="paper" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#597446" opacity=".07"/></pattern></defs>
- <path d="M90 145C110 38 252 30 347 49C444 9 580 25 642 127C710 238 703 382 618 438C510 510 209 489 93 423C3 370 13 223 90 145Z" fill="url(#sky)"/>
- <circle cx="533" cy="118" r="43" fill="#f4dfa4" opacity=".65"/><circle cx="533" cy="118" r="63" fill="#f4dfa4" opacity=".14"/>
- <path d="M81 310Q204 231 332 303Q472 217 650 304L673 379Q539 471 357 466Q159 487 55 382Z" fill="#d2dfba"/>
- <path d="M44 354Q183 281 333 346Q493 268 678 346L674 393Q592 473 346 482Q138 479 44 399Z" fill="url(#hill)"/>
- <path d="M70 405Q254 343 391 395Q521 350 651 405Q570 484 327 480Q153 477 70 405" fill="#aec793"/>
- <path d="M473 315Q440 367 390 379Q356 389 386 410Q436 432 478 473" stroke="#eae1bd" strokeWidth="33" fill="none"/>
- <path d="M473 315Q440 367 390 379Q356 389 386 410Q436 432 478 473" stroke="#f2ead0" strokeWidth="24" fill="none"/>
- <g {...interactive('Your memory home',count>=10?'A warm little home, unlocked by 10 activities.':'A little place for your stories. Complete 10 activities to earn the Memory Home decoration.')} className="garden-object"><path d="M491 285L548 245L605 282V351H491Z" fill="#f2e4c7"/><path d="M479 286L548 232L617 280L607 291L548 248L490 297Z" fill="#ae8061"/><path d="M479 286L548 232L617 280" stroke="#805a43" strokeWidth="4" fill="none"/><rect x="538" y="307" width="24" height="43" rx="12" fill="#8b9b73"/><rect x="503" y="295" width="20" height="21" rx="2" fill="#cfddc4" stroke="#c6b48d" strokeWidth="3"/><rect x="575" y="295" width="20" height="21" rx="2" fill="#cfddc4" stroke="#c6b48d" strokeWidth="3"/><path d="M513 295V316M503 305H523M585 295V316M575 305H595" stroke="#b6a780" strokeWidth="2"/><rect x="579" y="242" width="11" height="28" rx="2" fill="#b88c6b"/></g>
- <g {...interactive('Your growing tree',`You’ve completed ${count} ${count===1?'activity':'activities'} and earned ${data.points} journey points. Every small moment helps your garden grow.`)} className="garden-object">
- <ellipse cx="296" cy="369" rx="117" ry="19" fill="#63864f" opacity=".16"/>
- <path d="M291 368Q311 322 293 260L252 213L270 204L305 253L317 181L333 181L323 277L369 230L380 242L329 301Q328 342 343 369Q318 379 291 368Z" fill="#9b7955"/>
- <path d="M309 360L313 293M313 293L279 234M313 293L324 213M319 313L356 267" fill="none" stroke="#b6966c" strokeWidth="5" strokeLinecap="round"/>
- <motion.g animate={reduced?{}:{rotate:[-.8,.8,-.8]}} transition={{duration:7,repeat:Infinity,ease:'easeInOut'}} style={{transformOrigin:'315px 250px'}} filter="url(#softshadow)">
- <path d="M196 240C147 225 145 170 183 153C175 111 220 89 253 107C271 53 341 58 359 94C405 68 458 104 448 145C494 169 477 226 439 231C421 268 370 266 348 247C325 282 274 269 259 246C234 267 208 260 196 240Z" fill="url(#treegreen)"/>
- <ellipse cx="237" cy="159" rx="55" ry="48" fill="#a1bb7d" opacity=".56"/><ellipse cx="318" cy="119" rx="48" ry="40" fill="#a7bf80" opacity=".65"/><ellipse cx="393" cy="153" rx="53" ry="45" fill="#8eac6c"/><ellipse cx="281" cy="206" rx="67" ry="44" fill="#739951" opacity=".54"/><ellipse cx="388" cy="216" rx="48" ry="29" fill="#668c4d" opacity=".46"/>
- {[[216,171],[239,121],[304,101],[359,139],[405,174],[285,226],[361,218],[195,208],[442,195]].map(([x,y],i)=><path key={i} d={`M${x} ${y}q-10 -15 1 -20q12 9 -1 20`} fill={i%2?'#c4d69a':'#c6d69e'} opacity=".65" transform={`rotate(${i*37} ${x} ${y})`}/>)}
- </motion.g></g>
- <g {...interactive('A quiet moment by the pond','A little invitation to pause. Breathe in gently, then breathe out. There is no hurry here.')} className="garden-object"><ellipse cx="203" cy="418" rx="75" ry="29" fill="#93b8a1"/><ellipse cx="203" cy="415" rx="66" ry="22" fill="#aecac0"/><path d="M164 413Q186 407 200 411M213 423H240M192 404H221" stroke="#d5e4d4" strokeWidth="3" fill="none" strokeLinecap="round"/><ellipse cx="165" cy="423" rx="13" ry="5" fill="#648b62"/><path d="M157 422Q159 406 167 420Q175 411 173 422" fill="#f1d5c5"/><ellipse cx="229" cy="406" rx="10" ry="4" fill="#709666"/></g>
- <g transform="translate(478 380)" {...interactive('The story bench','Your favorite stories are always welcome here. Visit your Memories album to revisit one.')} className="garden-object"><path d="M0 0H70M0 10H70M-4 22H74" stroke="#a78b62" strokeWidth="7" strokeLinecap="round"/><path d="M4 -6V35M64 -6V35" stroke="#7b7354" strokeWidth="4"/></g>
- {[...Array(blooms)].map((_,i)=>{const positions=[[113,366],[142,346],[368,435],[584,398],[609,373],[91,400],[326,427],[555,437],[271,451],[635,350],[473,356],[247,383]];const[x,y]=positions[i];return <g key={i} {...interactive('Memory Flower',`This flower celebrates your small, meaningful moments. ${count} activities completed. Keep playing to grow more blooms.`)} className="garden-object"><path d={`M${x} ${y}v-22m0 13q-12 -10 -14 -6m14 1q10 -10 13 -7`} stroke="#688956" strokeWidth="2" fill="none"/><g transform={`translate(${x} ${y-25})`} fill={['#f1d5b6','#e9baa4','#f3e7bf'][i%3]}>{[0,72,144,216,288].map(a=><ellipse key={a} cy="-5" rx="4" ry="6" transform={`rotate(${a})`}/>)}<circle r="3" fill="#b99251"/></g></g>;})}
- {[[132,270],[466,179],[414,324]].slice(0,hero?3:1+Math.floor(count/3)).map(([x,y],i)=><motion.g key={i} animate={reduced?{}:{x:[0,8,0],y:[0,-12,0]}} transition={{duration:5+i,repeat:Infinity,ease:'easeInOut'}}><g transform={`translate(${x} ${y}) rotate(-15)`}><path d="M0 0C-25 -24 -23 13 0 5C20 -18 23 16 0 5" fill={i===1?'#e1bc77':'#e8c49c'}/><path d="M0 0L0 9" stroke="#95835c" strokeWidth="2"/></g></motion.g>)}
- <g stroke="#759363" strokeWidth="2" fill="none" opacity=".7"><path d="M394 83q7 -8 14 0q7 -8 14 0M434 63q5 -6 10 0q5 -6 10 0"/></g>
- {[[183,368],[421,447],[572,369]].map(([x,y],i)=><g key={i} {...interactive('Memory stone',`${data.memories.length} stories are tucked safely into your demo album on this device.`)} className="garden-object"><ellipse cx={x} cy={y} rx="15" ry="9" fill="#d6d5ba"/><path d={`M${x-4} ${y}l3 3 5 -5`} stroke="#a8ac8b" strokeWidth="1.5" fill="none"/></g>)}
- <path d="M90 145C110 38 252 30 347 49C444 9 580 25 642 127C710 238 703 382 618 438C510 510 209 489 93 423C3 370 13 223 90 145Z" fill="url(#paper)" pointerEvents="none"/>
- </svg>{!hero&&<span className="garden-hint"><Icon name="MousePointer2" size={15}/> Tap a little detail. Find a little story.</span>}</div>;
+import React from "react";
+import { motion } from "framer-motion";
+import { useStore } from "../../store/state.jsx";
+import { Icon, Button } from "../common/ui.jsx";
+export default function GardenScene({ hero = false, large = false }) {
+  const { data, setModal } = useStore();
+  const count = data.completed.length;
+  const blooms = hero ? 7 : Math.min(12, 2 + count);
+  const reduced = data.settings.motion;
+  function inspect(title, text) {
+    if (hero) return;
+    setModal({
+      title,
+      content: (
+        <div className="garden-discovery">
+          <span>🌿</span>
+          <p>{text}</p>
+          <Button onClick={() => setModal(null)}>Lovely</Button>
+        </div>
+      ),
+    });
+  }
+  const interactive = (title, text) => ({
+    role: hero ? undefined : "button",
+    tabIndex: hero ? undefined : 0,
+    "aria-label": title,
+    onClick: () => inspect(title, text),
+    onKeyDown: (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        inspect(title, text);
+      }
+    },
+  });
+  return (
+    <div
+      className={`garden-scene ${large ? "large" : ""} ${hero ? "hero-garden" : ""}`}
+    >
+      <svg
+        viewBox="0 0 720 530"
+        role="img"
+        aria-label="Your peaceful memory garden, with a leafy tree, flowers, a little home, and a pond"
+      >
+        <defs>
+          <linearGradient id="sky" x2="0" y2="1">
+            <stop stopColor="#f1f3dc" />
+            <stop offset="1" stopColor="#e3eddc" />
+          </linearGradient>
+          <linearGradient id="hill" x2="0" y2="1">
+            <stop stopColor="#b9cf9f" />
+            <stop offset="1" stopColor="#99b980" />
+          </linearGradient>
+          <linearGradient id="treegreen" x2=".7" y2="1">
+            <stop stopColor="#91b06e" />
+            <stop offset="1" stopColor="#567b43" />
+          </linearGradient>
+          <filter id="softshadow">
+            <feDropShadow
+              dx="0"
+              dy="7"
+              stdDeviation="7"
+              floodColor="#4b6735"
+              floodOpacity=".15"
+            />
+          </filter>
+          <pattern
+            id="paper"
+            width="7"
+            height="7"
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="1" cy="1" r=".55" fill="#597446" opacity=".07" />
+          </pattern>
+        </defs>
+        <path
+          d="M90 145C110 38 252 30 347 49C444 9 580 25 642 127C710 238 703 382 618 438C510 510 209 489 93 423C3 370 13 223 90 145Z"
+          fill="url(#sky)"
+        />
+        <circle cx="533" cy="118" r="43" fill="#f4dfa4" opacity=".65" />
+        <circle cx="533" cy="118" r="63" fill="#f4dfa4" opacity=".14" />
+        <path
+          d="M81 310Q204 231 332 303Q472 217 650 304L673 379Q539 471 357 466Q159 487 55 382Z"
+          fill="#d2dfba"
+        />
+        <path
+          d="M44 354Q183 281 333 346Q493 268 678 346L674 393Q592 473 346 482Q138 479 44 399Z"
+          fill="url(#hill)"
+        />
+        <path
+          d="M70 405Q254 343 391 395Q521 350 651 405Q570 484 327 480Q153 477 70 405"
+          fill="#aec793"
+        />
+        <path
+          d="M473 315Q440 367 390 379Q356 389 386 410Q436 432 478 473"
+          stroke="#eae1bd"
+          strokeWidth="33"
+          fill="none"
+        />
+        <path
+          d="M473 315Q440 367 390 379Q356 389 386 410Q436 432 478 473"
+          stroke="#f2ead0"
+          strokeWidth="24"
+          fill="none"
+        />
+        <g
+          {...interactive(
+            "Your memory home",
+            count >= 10
+              ? "A warm little home, unlocked by 10 activities."
+              : "A little place for your stories. Complete 10 activities to earn the Memory Home decoration.",
+          )}
+          className="garden-object"
+        >
+          <path d="M491 285L548 245L605 282V351H491Z" fill="#f2e4c7" />
+          <path
+            d="M479 286L548 232L617 280L607 291L548 248L490 297Z"
+            fill="#ae8061"
+          />
+          <path
+            d="M479 286L548 232L617 280"
+            stroke="#805a43"
+            strokeWidth="4"
+            fill="none"
+          />
+          <rect x="538" y="307" width="24" height="43" rx="12" fill="#8b9b73" />
+          <rect
+            x="503"
+            y="295"
+            width="20"
+            height="21"
+            rx="2"
+            fill="#cfddc4"
+            stroke="#c6b48d"
+            strokeWidth="3"
+          />
+          <rect
+            x="575"
+            y="295"
+            width="20"
+            height="21"
+            rx="2"
+            fill="#cfddc4"
+            stroke="#c6b48d"
+            strokeWidth="3"
+          />
+          <path
+            d="M513 295V316M503 305H523M585 295V316M575 305H595"
+            stroke="#b6a780"
+            strokeWidth="2"
+          />
+          <rect x="579" y="242" width="11" height="28" rx="2" fill="#b88c6b" />
+        </g>
+        <g
+          {...interactive(
+            "Your growing tree",
+            `You’ve completed ${count} ${count === 1 ? "activity" : "activities"} and earned ${data.points} journey points. Every small moment helps your garden grow.`,
+          )}
+          className="garden-object"
+        >
+          <ellipse
+            cx="296"
+            cy="369"
+            rx="117"
+            ry="19"
+            fill="#63864f"
+            opacity=".16"
+          />
+          <path
+            d="M291 368Q311 322 293 260L252 213L270 204L305 253L317 181L333 181L323 277L369 230L380 242L329 301Q328 342 343 369Q318 379 291 368Z"
+            fill="#9b7955"
+          />
+          <path
+            d="M309 360L313 293M313 293L279 234M313 293L324 213M319 313L356 267"
+            fill="none"
+            stroke="#b6966c"
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+          <motion.g
+            animate={reduced ? {} : { rotate: [-0.8, 0.8, -0.8] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            style={{ transformOrigin: "315px 250px" }}
+            filter="url(#softshadow)"
+          >
+            <path
+              d="M196 240C147 225 145 170 183 153C175 111 220 89 253 107C271 53 341 58 359 94C405 68 458 104 448 145C494 169 477 226 439 231C421 268 370 266 348 247C325 282 274 269 259 246C234 267 208 260 196 240Z"
+              fill="url(#treegreen)"
+            />
+            <ellipse
+              cx="237"
+              cy="159"
+              rx="55"
+              ry="48"
+              fill="#a1bb7d"
+              opacity=".56"
+            />
+            <ellipse
+              cx="318"
+              cy="119"
+              rx="48"
+              ry="40"
+              fill="#a7bf80"
+              opacity=".65"
+            />
+            <ellipse cx="393" cy="153" rx="53" ry="45" fill="#8eac6c" />
+            <ellipse
+              cx="281"
+              cy="206"
+              rx="67"
+              ry="44"
+              fill="#739951"
+              opacity=".54"
+            />
+            <ellipse
+              cx="388"
+              cy="216"
+              rx="48"
+              ry="29"
+              fill="#668c4d"
+              opacity=".46"
+            />
+            {[
+              [216, 171],
+              [239, 121],
+              [304, 101],
+              [359, 139],
+              [405, 174],
+              [285, 226],
+              [361, 218],
+              [195, 208],
+              [442, 195],
+            ].map(([x, y], i) => (
+              <path
+                key={i}
+                d={`M${x} ${y}q-10 -15 1 -20q12 9 -1 20`}
+                fill={i % 2 ? "#c4d69a" : "#c6d69e"}
+                opacity=".65"
+                transform={`rotate(${i * 37} ${x} ${y})`}
+              />
+            ))}
+          </motion.g>
+        </g>
+        <g
+          {...interactive(
+            "A quiet moment by the pond",
+            "A little invitation to pause. Breathe in gently, then breathe out. There is no hurry here.",
+          )}
+          className="garden-object"
+        >
+          <ellipse cx="203" cy="418" rx="75" ry="29" fill="#93b8a1" />
+          <ellipse cx="203" cy="415" rx="66" ry="22" fill="#aecac0" />
+          <path
+            d="M164 413Q186 407 200 411M213 423H240M192 404H221"
+            stroke="#d5e4d4"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <ellipse cx="165" cy="423" rx="13" ry="5" fill="#648b62" />
+          <path d="M157 422Q159 406 167 420Q175 411 173 422" fill="#f1d5c5" />
+          <ellipse cx="229" cy="406" rx="10" ry="4" fill="#709666" />
+        </g>
+        <g
+          transform="translate(478 380)"
+          {...interactive(
+            "The story bench",
+            "Your favorite stories are always welcome here. Visit your Memories album to revisit one.",
+          )}
+          className="garden-object"
+        >
+          <path
+            d="M0 0H70M0 10H70M-4 22H74"
+            stroke="#a78b62"
+            strokeWidth="7"
+            strokeLinecap="round"
+          />
+          <path d="M4 -6V35M64 -6V35" stroke="#7b7354" strokeWidth="4" />
+        </g>
+        {[...Array(blooms)].map((_, i) => {
+          const positions = [
+            [113, 366],
+            [142, 346],
+            [368, 435],
+            [584, 398],
+            [609, 373],
+            [91, 400],
+            [326, 427],
+            [555, 437],
+            [271, 451],
+            [635, 350],
+            [473, 356],
+            [247, 383],
+          ];
+          const [x, y] = positions[i];
+          return (
+            <g
+              key={i}
+              {...interactive(
+                "Memory Flower",
+                `This flower celebrates your small, meaningful moments. ${count} activities completed. Keep playing to grow more blooms.`,
+              )}
+              className="garden-object"
+            >
+              <path
+                d={`M${x} ${y}v-22m0 13q-12 -10 -14 -6m14 1q10 -10 13 -7`}
+                stroke="#688956"
+                strokeWidth="2"
+                fill="none"
+              />
+              <g
+                transform={`translate(${x} ${y - 25})`}
+                fill={["#f1d5b6", "#e9baa4", "#f3e7bf"][i % 3]}
+              >
+                {[0, 72, 144, 216, 288].map((a) => (
+                  <ellipse
+                    key={a}
+                    cy="-5"
+                    rx="4"
+                    ry="6"
+                    transform={`rotate(${a})`}
+                  />
+                ))}
+                <circle r="3" fill="#b99251" />
+              </g>
+            </g>
+          );
+        })}
+        {[
+          [132, 270],
+          [466, 179],
+          [414, 324],
+        ]
+          .slice(0, hero ? 3 : 1 + Math.floor(count / 3))
+          .map(([x, y], i) => (
+            <motion.g
+              key={i}
+              animate={reduced ? {} : { x: [0, 8, 0], y: [0, -12, 0] }}
+              transition={{
+                duration: 5 + i,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <g transform={`translate(${x} ${y}) rotate(-15)`}>
+                <path
+                  d="M0 0C-25 -24 -23 13 0 5C20 -18 23 16 0 5"
+                  fill={i === 1 ? "#e1bc77" : "#e8c49c"}
+                />
+                <path d="M0 0L0 9" stroke="#95835c" strokeWidth="2" />
+              </g>
+            </motion.g>
+          ))}
+        <g stroke="#759363" strokeWidth="2" fill="none" opacity=".7">
+          <path d="M394 83q7 -8 14 0q7 -8 14 0M434 63q5 -6 10 0q5 -6 10 0" />
+        </g>
+        {[
+          [183, 368],
+          [421, 447],
+          [572, 369],
+        ].map(([x, y], i) => (
+          <g
+            key={i}
+            {...interactive(
+              "Memory stone",
+              `${data.memories.length} stories are tucked safely into your demo album on this device.`,
+            )}
+            className="garden-object"
+          >
+            <ellipse cx={x} cy={y} rx="15" ry="9" fill="#d6d5ba" />
+            <path
+              d={`M${x - 4} ${y}l3 3 5 -5`}
+              stroke="#a8ac8b"
+              strokeWidth="1.5"
+              fill="none"
+            />
+          </g>
+        ))}
+        <path
+          d="M90 145C110 38 252 30 347 49C444 9 580 25 642 127C710 238 703 382 618 438C510 510 209 489 93 423C3 370 13 223 90 145Z"
+          fill="url(#paper)"
+          pointerEvents="none"
+        />
+      </svg>
+      {!hero && (
+        <span className="garden-hint">
+          <Icon name="MousePointer2" size={15} /> Tap a little detail. Find a
+          little story.
+        </span>
+      )}
+    </div>
+  );
 }
-export function GameArt({type}){
- const symbols={faces:['👩🏻','👨🏻','👵🏻'],cards:['🌷','🌿','🌷','?'],room:['🪴','🛋️','🕰️'],sequence:['☀️','🪥','☕'],market:['🍎','🥛','🍞'],recipe:['🫖','☕','🥄'],objects:['🔑','👓','📖'],family:['📷','❤️','🌴']};
- return <div className={`game-art art-${type}`} aria-hidden="true"><span className="art-orbit"/>{(symbols[type]||symbols.cards).map((s,i)=><span className={`art-item art-item-${i}`} key={i}>{s}</span>)}<i className="art-spark one">✦</i><i className="art-spark two">✧</i></div>;
+export function GameArt({ type }) {
+  const symbols = {
+    faces: ["👩🏻", "👨🏻", "👵🏻"],
+    cards: ["🌷", "🌿", "🌷", "?"],
+    room: ["🪴", "🛋️", "🕰️"],
+    sequence: ["☀️", "🪥", "☕"],
+    market: ["🍎", "🥛", "🍞"],
+    recipe: ["🫖", "☕", "🥄"],
+    objects: ["🔑", "👓", "📖"],
+    family: ["📷", "❤️", "🌴"],
+  };
+  return (
+    <div className={`game-art art-${type}`} aria-hidden="true">
+      <span className="art-orbit" />
+      {(symbols[type] || symbols.cards).map((s, i) => (
+        <span className={`art-item art-item-${i}`} key={i}>
+          {s}
+        </span>
+      ))}
+      <i className="art-spark one">✦</i>
+      <i className="art-spark two">✧</i>
+    </div>
+  );
 }
