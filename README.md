@@ -13,6 +13,19 @@ npm run dev
 # Open http://localhost:5174
 ```
 
+## Deploy to Vercel
+
+```bash
+# One-click deploy
+npm i -g vercel
+vercel --prod
+
+# Or push to GitHub - auto-deploys
+git push origin main
+```
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full guide.
+
 ---
 
 ## Features
