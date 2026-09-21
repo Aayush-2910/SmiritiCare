@@ -397,10 +397,10 @@ export function GameArt({ type }) {
     faces: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=300&h=200&fit=crop',
     cards: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300&h=200&fit=crop',
     room: 'https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=300&h=200&fit=crop',
-    sequence: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=300&h=200&fit=crop',
-    market: 'https://images.unsplash.com/photo-1488459716781-6f3ee309991a?w=300&h=200&fit=crop',
+    sequence: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=300&h=200&fit=crop',
+    market: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&h=200&fit=crop',
     recipe: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop',
-    objects: 'https://images.unsplash.com/photo-1549887534-f3bda4d3d8f3?w=300&h=200&fit=crop',
+    objects: 'https://images.unsplash.com/photo-1570129477492-45acc003a6bb?w=300&h=200&fit=crop',
     family: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=300&h=200&fit=crop'
   };
 
