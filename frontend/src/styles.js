@@ -6,3 +6,4 @@ import './assets/styles/responsive.css';
 import './assets/styles/voice-hero.css';
 import './assets/styles/premium-hero-video.css';
 import './assets/styles/premium-nav.css';
+import './assets/styles/sections.css';

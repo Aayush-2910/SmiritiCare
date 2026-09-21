@@ -400,7 +400,7 @@ export function GameArt({ type }) {
     sequence: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=300&h=200&fit=crop',
     market: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&h=200&fit=crop',
     recipe: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop',
-    objects: 'https://images.unsplash.com/photo-1595521624355-a79e53dd3fa9?w=300&h=200&fit=crop',
+    objects: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop',
     family: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=300&h=200&fit=crop'
   };
 

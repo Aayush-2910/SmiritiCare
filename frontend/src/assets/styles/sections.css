@@ -1,0 +1,811 @@
+/* Section-specific styling for Family, Garden, and Achievements pages */
+
+/* CRITICAL RESPONSIVE FIXES FOR DECORATIVE IMAGES */
+
+/* All decorative images positioning - responsive */
+.page-decoration-image {
+  position: absolute;
+  object-fit: contain;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+}
+
+/* Sun decoration (top-right) */
+.sun-decoration {
+  right: 40px;
+  top: 80px;
+  width: 120px;
+  height: auto;
+}
+
+/* Flower decoration (top-right smaller) */
+.flower-decoration-top {
+  right: 40px;
+  top: 80px;
+  width: 100px;
+  height: auto;
+}
+
+/* Parrot decoration (top-right) */
+.parrot-decoration {
+  right: 20px;
+  top: 60px;
+  width: 90px;
+  height: auto;
+}
+
+/* Prevent footer decorations from extending beyond viewport */
+.family-tulips-footer,
+.journey-tulips-footer,
+.reminders-flowers-footer {
+  margin-bottom: 0 !important;
+  overflow: hidden;
+}
+
+.family-tulips-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 40px;
+  padding: 0;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+  height: auto;
+}
+
+.family-tulip-image {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
+}
+
+/* Enhanced Family Connection Banner */
+.family-connection-banner {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #f9ede4 0%, #f5e8dd 50%, #f0dfd1 100%);
+  border: 2px solid rgba(200, 150, 130, 0.3);
+  border-radius: 20px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(200, 150, 120, 0.1);
+}
+
+.family-connection-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -15%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(184, 155, 104, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.family-connection-banner > span {
+  font-size: 2.4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.family-connection-banner > div {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.family-connection-banner h3 {
+  font-size: 1.15rem;
+  color: #5c7a5a;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.family-connection-banner p {
+  font-size: 0.88rem;
+  color: #8a8070;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+/* Achievement Banner Enhancement */
+.achievement-banner {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  background: linear-gradient(135deg, #fdf9f0 0%, #fae9d6 50%, #f5ded6 100%);
+  border: 2px solid rgba(184, 155, 104, 0.3);
+  border-radius: 22px;
+  padding: 32px 36px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(184, 155, 104, 0.12);
+}
+
+.achievement-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(184, 155, 104, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.achievement-banner > span {
+  font-size: 3.8rem;
+  position: relative;
+  z-index: 2;
+}
+
+.achievement-banner > div {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.achievement-banner h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3e6245;
+  letter-spacing: -0.5px;
+}
+
+.achievement-banner p {
+  font-size: 0.92rem;
+  color: #8a8573;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* Reminders Page Flowers Footer */
+.reminders-flowers-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 60px;
+  margin-top: 40px;
+  margin-bottom: -55px;
+  padding: 0;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.reminder-flower-image {
+  height: 110px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
+}
+
+/* Enhanced Reminders List */
+.reminders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.reminder-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: white;
+  border: 1.5px solid #e8ede5;
+  transition: all .35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.reminder-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left .5s;
+}
+
+.reminder-card:hover::before {
+  left: 100%;
+}
+
+.reminder-card:hover {
+  transform: translateX(4px);
+  border-color: #d8e8cc;
+  box-shadow: 0 8px 20px rgba(100,140,80,0.12);
+  background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(250,252,248,1));
+}
+
+.reminder-card.done {
+  background: #f3f7ed;
+  opacity: 0.75;
+}
+
+.reminder-card.done h3 {
+  color: #8a9b7d;
+  text-decoration: line-through;
+}
+
+.reminder-card-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.reminder-card-copy .eyebrow {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.reminder-card-copy h3 {
+  font-size: 1.02rem;
+  margin: 6px 0 10px;
+  color: #3e6245;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+
+.reminder-card-copy p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #7a8d6f;
+  flex-wrap: wrap;
+}
+
+.reminder-card-copy p span {
+  margin: 0 4px;
+  opacity: 0.6;
+}
+
+.reminder-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.reminder-actions .btn {
+  font-size: 0.82rem;
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+
+.reminder-actions .icon-btn {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reminder-actions .icon-btn.bordered {
+  border: 1px solid #dce7d1;
+  background: rgba(245,252,248,0.7);
+}
+
+/* Messages Page Enhancement */
+.messages-layout {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid #e8ede5;
+  height: auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+
+.conversation-list {
+  background: linear-gradient(135deg, #fafcf5 0%, #f9fbf3 100%);
+  border-right: 1px solid #e8ede5;
+  padding: 20px 12px;
+}
+
+.conversation-list h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-left: 10px;
+  margin-bottom: 18px;
+  color: #5c7a5a;
+  letter-spacing: 0.3px;
+}
+
+.conversation-list > button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 10px;
+  border-radius: 10px;
+  min-width: 0;
+  font-size: 0.82rem;
+  border: 1px solid transparent;
+  transition: all .25s;
+  color: #3e6245;
+}
+
+.conversation-list > button:hover {
+  background: rgba(165, 215, 167, 0.15);
+  border-color: rgba(165, 215, 167, 0.3);
+}
+
+.conversation-list > button.active {
+  background: linear-gradient(135deg, #e9f0df 0%, #f0f5e9 100%);
+  border-color: rgba(165, 215, 167, 0.5);
+  font-weight: 600;
+}
+
+.conversation-list > button strong {
+  font-size: 0.82rem;
+  display: block;
+  font-weight: 600;
+}
+
+.conversation-list > button small {
+  display: block;
+  font-size: 0.75rem;
+  color: #879975;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 140px;
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+}
+
+.conversation-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e8ede5;
+  background: linear-gradient(135deg, rgba(250,252,248,0.6) 0%, rgba(245,250,242,0.5) 100%);
+}
+
+.conversation-header h3 {
+  font-size: 0.96rem;
+  color: #3e6245;
+  font-weight: 600;
+}
+
+.conversation-header > div > span {
+  font-size: 0.75rem;
+  color: #8fa17d;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+.chat-messages {
+  padding: 20px 24px;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #fdfef8;
+}
+
+.chat-date {
+  align-self: center;
+  font-size: 0.75rem;
+  color: #95a587;
+  margin-bottom: 8px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.message-bubble {
+  max-width: 70%;
+  border: 1px solid #e8ede5;
+  border-radius: 14px;
+  padding: 12px 16px;
+  min-width: 80px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.message-bubble.incoming {
+  align-self: flex-start;
+  background: #f1f4e9;
+  border-bottom-left-radius: 3px;
+}
+
+.message-bubble.outgoing {
+  align-self: flex-end;
+  background: #e5efdb;
+  border-color: #dce7d1;
+  border-bottom-right-radius: 3px;
+}
+
+.message-bubble p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #3e6245;
+  margin: 0;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  display: block;
+  text-align: right;
+  margin-top: 6px;
+  color: #8a9d78;
+  font-weight: 500;
+}
+
+.chat-compose {
+  border-top: 1px solid #e8ede5;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fdfef8;
+  flex-wrap: nowrap;
+}
+
+.chat-compose input {
+  flex: 1;
+  min-width: 100px;
+  border: 1px solid #e8ede5;
+  background: #f9fbf5;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #3e6245;
+  transition: all .2s;
+  max-width: calc(100% - 130px);
+}
+
+.chat-compose input:focus {
+  outline: none;
+  border-color: rgba(165, 215, 167, 0.5);
+  background: white;
+  box-shadow: 0 0 0 2px rgba(165, 215, 167, 0.1);
+}
+
+.chat-compose input::placeholder {
+  color: #91a17f;
+  font-size: 0.88rem;
+}
+
+.chat-compose .icon-btn {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #7a8d6f;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.chat-compose .icon-btn:hover {
+  background: rgba(165, 215, 167, 0.1);
+  color: #5c8251;
+}
+
+.send-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--green);
+  color: white;
+  flex-shrink: 0;
+  transition: all .2s;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(100, 140, 80, 0.2);
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(100, 140, 80, 0.3);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
+/* RESPONSIVE OVERRIDES FOR SECTIONS */
+
+/* TABLET (1024px-1149px) */
+@media(max-width:1149px) and (min-width:1025px){
+  .sun-decoration,
+  .flower-decoration-top {
+    right: 30px;
+    top: 60px;
+    width: 100px;
+  }
+  
+  .parrot-decoration {
+    right: 15px;
+    top: 50px;
+    width: 80px;
+  }
+  
+  .family-tulips-footer {
+    gap: 60px;
+    margin-top: 30px;
+  }
+  
+  .family-tulip-image {
+    height: 100px;
+  }
+  
+  .reminders-flowers-footer {
+    gap: 40px;
+    margin-top: 30px;
+  }
+  
+  .reminder-flower-image {
+    height: 90px;
+  }
+}
+
+/* MOBILE & TABLET (max 1024px) */
+@media(max-width:1024px){
+  /* Hide all absolutely positioned page decorations on tablet */
+  .page-decoration-image {
+    display: none;
+  }
+  
+  /* Footer decorations: reduce size and spacing */
+  .family-tulips-footer {
+    gap: 40px;
+    margin-top: 25px;
+    margin-bottom: 0;
+  }
+  
+  .family-tulip-image {
+    height: 80px;
+  }
+  
+  .reminders-flowers-footer {
+    gap: 30px;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  
+  .reminder-flower-image {
+    height: 70px;
+  }
+  
+  .journey-tulips-footer {
+    gap: 40px;
+    margin-bottom: 0;
+  }
+  
+  .tulip-image {
+    height: 80px;
+  }
+  
+  /* Messages layout responsive */
+  .messages-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: calc(100dvh - 180px);
+    min-height: 400px;
+  }
+  
+  .conversation-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    border-right: 0;
+    border-bottom: 1px solid #e8ede5;
+    padding: 10px 8px;
+    overflow-x: auto;
+    flex-shrink: 0;
+  }
+  
+  .conversation-list > h3 {
+    display: none;
+  }
+  
+  .conversation-list > button {
+    min-width: 90px;
+    width: auto;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 8px 6px;
+    flex-shrink: 0;
+  }
+  
+  .conversation-list > button strong {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+  
+  .conversation-list > button small {
+    display: none;
+  }
+  
+  .conversation-list > button svg {
+    display: none;
+  }
+  
+  .conversation {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .message-bubble {
+    max-width: 85%;
+  }
+}
+
+/* MOBILE (max 699px) */
+@media(max-width:699px){
+  /* Hide all page decorations on mobile */
+  .page-decoration-image,
+  .sun-decoration,
+  .flower-decoration-top,
+  .parrot-decoration {
+    display: none !important;
+  }
+  
+  /* Footer decorations minimum styling */
+  .family-tulips-footer,
+  .journey-tulips-footer,
+  .reminders-flowers-footer {
+    gap: 20px;
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+  
+  .family-tulip-image,
+  .tulip-image {
+    height: 60px;
+  }
+  
+  .reminder-flower-image {
+    height: 50px;
+  }
+  
+  /* Responsive messages layout */
+  .messages-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: calc(100dvh - 200px);
+    min-height: 300px;
+  }
+  
+  .conversation-list {
+    max-height: 60px;
+    overflow-y: hidden;
+  }
+  
+  .conversation-list > button {
+    min-width: 70px;
+  }
+  
+  .conversation-list > button strong {
+    font-size: 0.65rem;
+  }
+  
+  .message-bubble {
+    max-width: 90%;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+  
+  .chat-messages {
+    padding: 15px 12px;
+    gap: 10px;
+  }
+  
+  .chat-compose {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  
+  .chat-compose input {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 10px 12px;
+    max-width: calc(100% - 110px);
+  }
+  
+  .chat-compose .icon-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+  
+  .reminder-card {
+    padding: 16px 18px;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  
+  .reminder-card-copy {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  
+  .reminder-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .reminder-actions .btn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+  
+  .reminders-flowers-footer {
+    justify-content: center;
+  }
+}
+
+/* EXTRA SMALL (max 369px) */
+@media(max-width:369px){
+  .reminder-card {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  
+  .reminder-actions .btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+  
+  .reminder-actions .icon-btn {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .conversation-list > button {
+    min-width: 60px;
+    font-size: 0.75rem;
+  }
+}
