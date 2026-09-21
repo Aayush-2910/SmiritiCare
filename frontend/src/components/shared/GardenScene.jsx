@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useStore } from "../../store/state.jsx";
 import { Icon, Button } from "../common/ui.jsx";
@@ -391,6 +391,35 @@ export default function GardenScene({ hero = false, large = false }) {
   );
 }
 export function GameArt({ type }) {
+  // Beautiful 2D game illustrations using public URLs
+  // Falls back to emoji art if images don't load
+  const gameImages = {
+    faces: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=300&h=200&fit=crop',
+    cards: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300&h=200&fit=crop',
+    room: 'https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=300&h=200&fit=crop',
+    sequence: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=300&h=200&fit=crop',
+    market: 'https://images.unsplash.com/photo-1488459716781-6f3ee309991a?w=300&h=200&fit=crop',
+    recipe: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop',
+    objects: 'https://images.unsplash.com/photo-1549887534-f3bda4d3d8f3?w=300&h=200&fit=crop',
+    family: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=300&h=200&fit=crop'
+  };
+
+  const [showImage, setShowImage] = useState(true);
+  const imageUrl = gameImages[type];
+
+  if (imageUrl && showImage) {
+    return (
+      <img 
+        src={imageUrl}
+        alt="Game"
+        className="game-art-image"
+        onError={() => setShowImage(false)}
+        loading="lazy"
+      />
+    );
+  }
+
+  // Fallback to emoji art if image load fails
   const symbols = {
     faces: ["👩🏻", "👨🏻", "👵🏻"],
     cards: ["🌷", "🌿", "🌷", "?"],
@@ -401,6 +430,7 @@ export function GameArt({ type }) {
     objects: ["🔑", "👓", "📖"],
     family: ["📷", "❤️", "🌴"],
   };
+
   return (
     <div className={`game-art art-${type}`} aria-hidden="true">
       <span className="art-orbit" />
