@@ -4,3 +4,5 @@ import './assets/styles/app.css';
 import './assets/styles/games.css';
 import './assets/styles/responsive.css';
 import './assets/styles/voice-hero.css';
+import './assets/styles/premium-hero-video.css';
+import './assets/styles/premium-nav.css';

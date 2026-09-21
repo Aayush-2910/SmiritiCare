@@ -1,0 +1,192 @@
+/* ------------------------------------------------------------------
+   Premium floating navbar — transparent over the video hero,
+   morphing into a frosted-glass bar on scroll. Loaded last so these
+   overrides win; theme palette only (ivory / sage / forest / peach).
+------------------------------------------------------------------- */
+
+.public-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 96px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease,
+    backdrop-filter 0.5s ease;
+  z-index: 100;
+}
+
+/* Frosted glass once scrolled */
+.public-header.is-scrolled {
+  height: 74px;
+  background: rgba(251, 247, 239, 0.82);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid rgba(47, 107, 79, 0.1);
+  box-shadow: 0 10px 34px rgba(31, 61, 46, 0.08);
+}
+
+/* Nav links — gentle underline bloom on hover */
+.public-links a {
+  position: relative;
+  font-size: 1.12rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+}
+
+.public-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2f6b4f, #8fb59d);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.public-links a:hover::after {
+  transform: scaleX(1);
+}
+
+.public-links a:hover {
+  color: var(--green);
+}
+
+/* Keep link color readable over the transparent (video) state */
+.public-header:not(.is-scrolled) .public-links a {
+  color: rgba(251, 247, 239, 0.92);
+}
+
+.public-header:not(.is-scrolled) .public-links a:hover {
+  color: #f0b27a;
+}
+
+.public-header:not(.is-scrolled) .public-links a::after {
+  background: linear-gradient(90deg, #f0b27a, #f5d9a8);
+}
+
+/* Logo — light over the transparent (video) state,
+   original dark palette once scrolled */
+.public-header:not(.is-scrolled) .brand {
+  color: #fbf7ef;
+  transition: color 0.45s ease;
+}
+
+.public-header:not(.is-scrolled) .brand-care {
+  color: rgba(251, 247, 239, 0.92);
+}
+
+.public-header:not(.is-scrolled) .brand-mark {
+  background: rgba(251, 247, 239, 0.16);
+  border: 1px solid rgba(251, 247, 239, 0.35);
+  color: #f0b27a;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition:
+    background-color 0.45s ease,
+    border-color 0.45s ease,
+    color 0.45s ease;
+}
+
+.public-header:not(.is-scrolled) .brand small {
+  color: rgba(251, 247, 239, 0.7);
+}
+
+/* Login link + accessibility control adapt too */
+.public-header:not(.is-scrolled) .nav-actions .login-link {
+  color: rgba(251, 247, 239, 0.92);
+}
+
+.public-header:not(.is-scrolled) .nav-actions .login-link:hover {
+  color: #f0b27a;
+}
+
+.public-header:not(.is-scrolled) .nav-actions .icon-btn {
+  color: rgba(251, 247, 239, 0.92);
+}
+
+.public-header:not(.is-scrolled) .nav-actions .icon-btn:hover {
+  color: #f0b27a;
+  background: rgba(251, 247, 239, 0.12);
+}
+
+/* Primary CTA — subtle lift + glow */
+.nav-actions .btn {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.nav-actions .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(47, 107, 79, 0.28);
+}
+
+/* Get started button reads well over video in the transparent state */
+.public-header:not(.is-scrolled) .nav-actions .btn {
+  box-shadow: 0 10px 30px rgba(9, 22, 15, 0.35);
+}
+
+/* Pages without a full-height hero (everything scrolls immediately) */
+body:not(:has(.phv)) .public-header {
+  background: rgba(251, 247, 239, 0.82);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid rgba(47, 107, 79, 0.1);
+}
+
+/* ---------------- Mobile ---------------- */
+@media (max-width: 700px) {
+  .public-header,
+  .public-header.is-scrolled {
+    height: 78px;
+  }
+
+  /* The existing dropdown panel already targets top:75px in
+     responsive.css — nudge it under the slightly taller bar. */
+  .public-links {
+    top: 78px;
+    background: rgba(251, 247, 239, 0.96);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  .public-header:not(.is-scrolled) .public-links.open {
+    background: rgba(251, 247, 239, 0.96);
+  }
+
+  /* Links inside the opened mobile panel always keep dark text */
+  .public-header:not(.is-scrolled) .public-links.open a {
+    color: #63715c;
+  }
+
+  .public-header:not(.is-scrolled) .public-links.open a:hover {
+    color: var(--green);
+  }
+
+  .public-header:not(.is-scrolled) .public-links.open a::after {
+    background: linear-gradient(90deg, #2f6b4f, #8fb59d);
+  }
+
+  .public-header:not(.is-scrolled) .nav-actions .mobile-menu {
+    color: rgba(251, 247, 239, 0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-header,
+  .public-links a::after,
+  .nav-actions .btn {
+    transition: none;
+  }
+}

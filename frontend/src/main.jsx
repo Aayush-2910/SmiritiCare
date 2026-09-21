@@ -18,6 +18,7 @@ import {
   Button,
   Icon,
 } from "./components/common/ui.jsx";
+import SiteLoader from "./components/shared/PremiumSiteLoader.jsx";
 import AppShell from "./components/layout/AppShell.jsx";
 import { Landing, AuthPage } from "./pages/Public.jsx";
 import { Dashboard } from "./features/dashboard/Dashboard.jsx";
@@ -37,7 +38,7 @@ import {
   RemindersPage,
 } from "./features/everyday/EverydayPages.jsx";
 import GamePage from "./features/games/GamePage.jsx";
-function WelcomeSeed() {
+function PremiumSiteLoader() {
   const { data } = useStore();
   const [show, setShow] = useState(() => {
     try {
@@ -54,31 +55,14 @@ function WelcomeSeed() {
     try {
       sessionStorage.setItem("smriticare-welcome", "seen");
     } catch {}
-    const timer = setTimeout(() => setShow(false), 2500);
+    const timer = setTimeout(() => setShow(false), 2800);
     return () => clearTimeout(timer);
   }, [show]);
   return (
-    <AnimatePresence>
-      {show && !data.settings.motion && (
-        <motion.div
-          className="brand-intro"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="seed-animation">
-            <span>🌱</span>
-            <span>🌿</span>
-            <span>🌸</span>
-          </div>
-          <h2>SmritiCare</h2>
-          <p>Good things start small.</p>
-          <button className="text-link" onClick={() => setShow(false)}>
-            Come on in <Icon name="ArrowRight" size={16} />
-          </button>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <SiteLoader
+      show={show && !data.settings.motion}
+      onSkip={() => setShow(false)}
+    />
   );
 }
 function RouteTitle() {
@@ -106,6 +90,7 @@ function Application() {
             "how-it-works",
             "games-preview",
             "family-connection",
+            "pricing",
             "memory-garden",
             "accessibility",
             "contact",
@@ -150,7 +135,7 @@ function Application() {
         </Routes>
         <ModalHost />
         <ToastHost />
-        <WelcomeSeed />
+        <PremiumSiteLoader />
       </HashRouter>
     </MotionConfig>
   );

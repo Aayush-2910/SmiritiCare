@@ -1,0 +1,182 @@
+/* ------------------------------------------------------------------
+   Premium site loader — ivory canvas, sage/peach accents.
+   Full-screen curtain that lifts away on exit.
+------------------------------------------------------------------- */
+
+.psl {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(
+      90% 70% at 50% 30%,
+      rgba(143, 181, 157, 0.16) 0%,
+      transparent 60%
+    ),
+    linear-gradient(160deg, #fbf7ef 0%, #f2ece0 100%);
+  clip-path: inset(0 0 0 0);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Ambient orbs */
+.psl-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.psl-orb--one {
+  width: 46vmin;
+  height: 46vmin;
+  background: #8fb59d;
+  top: -10%;
+  left: -6%;
+  animation: psl-drift 9s ease-in-out infinite alternate;
+}
+
+.psl-orb--two {
+  width: 40vmin;
+  height: 40vmin;
+  background: #f0b27a;
+  bottom: -12%;
+  right: -6%;
+  animation: psl-drift 11s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes psl-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4vw, 4vh, 0) scale(1.15);
+  }
+}
+
+/* Breathing ring behind the mark */
+.psl-ring {
+  position: absolute;
+  width: 46vmin;
+  height: 46vmin;
+  border-radius: 50%;
+  border: 1px solid rgba(47, 107, 79, 0.18);
+  pointer-events: none;
+}
+
+.psl-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---------------- Sprout ---------------- */
+.psl-sprout {
+  width: clamp(96px, 14vmin, 140px);
+  height: auto;
+  overflow: visible;
+}
+
+.psl-sprout-soil {
+  stroke: #63715c;
+  stroke-width: 3;
+}
+.psl-sprout-stem {
+  stroke: #2f6b4f;
+  stroke-width: 4;
+}
+
+.psl-sprout-leaf {
+  fill: #8fb59d;
+  stroke: #2f6b4f;
+  stroke-width: 2;
+  transform-origin: 60px 62px;
+}
+
+.psl-sprout-leaf--right {
+  fill: #2f6b4f;
+  transform-origin: 60px 52px;
+}
+
+/* Tiny bloom dot that pops when growth finishes */
+.psl-sprout-bloom {
+  position: absolute;
+  top: 8%;
+  right: 18%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f0b27a;
+  box-shadow: 0 0 18px rgba(240, 178, 122, 0.9);
+  display: block;
+}
+
+/* ---------------- Wordmark ---------------- */
+.psl-word {
+  margin: 26px 0 10px;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1c3527;
+  line-height: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+.psl-word span {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.psl-word-accent {
+  color: #2f6b4f;
+}
+
+.psl-tagline {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  letter-spacing: 0.06em;
+  color: #63715c;
+  margin-bottom: 34px;
+}
+
+/* ---------------- Progress line ---------------- */
+.psl-progress {
+  width: min(220px, 52vw);
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(47, 107, 79, 0.14);
+  overflow: hidden;
+}
+
+.psl-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2f6b4f, #8fb59d 60%, #f0b27a);
+  transform-origin: left;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 520px) {
+  .psl-sprout {
+    width: 88px;
+  }
+  .psl-word {
+    margin-top: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .psl-orb,
+  .psl-ring {
+    animation: none;
+  }
+}
