@@ -20,6 +20,7 @@ import ReassuranceStrip from "../components/shared/ReassuranceStrip";
 import PremiumAbout from "../components/shared/PremiumAbout";
 import PremiumHowItWorks from "../components/shared/PremiumHowItWorks";
 import PremiumPricing from "../components/shared/PremiumPricing";
+import PremiumProgressShowcase from "../components/shared/PremiumProgressShowcase";
 import PremiumStories from "../components/shared/PremiumStories";
 import PremiumFaq from "../components/shared/PremiumFaq";
 import PremiumFinalCta from "../components/shared/PremiumFinalCta";
@@ -91,6 +92,7 @@ const sectionRoutes = {
   "/features": "features",
   "/games-preview": "games-preview",
   "/family-connection": "family-connection",
+  "/progress-showcase": "progress-showcase",
   "/pricing": "pricing",
   "/memory-garden": "memory-garden",
   "/accessibility": "accessibility",
@@ -233,6 +235,7 @@ export function Landing() {
             </div>
           </div>
         </section>
+        <PremiumProgressShowcase />
         <PremiumPricing />
         <section
           className="section container garden-feature"

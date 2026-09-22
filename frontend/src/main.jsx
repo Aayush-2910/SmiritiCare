@@ -18,8 +18,8 @@ import {
   Button,
   Icon,
 } from "./components/common/ui.jsx";
-import SiteLoader from "./components/shared/PremiumSiteLoader.jsx";
 import AppShell from "./components/layout/AppShell.jsx";
+import PremiumSiteLoader from "./components/shared/PremiumSiteLoader.jsx";
 import { Landing, AuthPage } from "./pages/Public.jsx";
 import { Dashboard } from "./features/dashboard/Dashboard.jsx";
 import {
@@ -38,8 +38,7 @@ import {
   RemindersPage,
 } from "./features/everyday/EverydayPages.jsx";
 import GamePage from "./features/games/GamePage.jsx";
-function PremiumSiteLoader() {
-  const { data } = useStore();
+function LoaderGate() {
   const [show, setShow] = useState(() => {
     try {
       return (
@@ -55,15 +54,10 @@ function PremiumSiteLoader() {
     try {
       sessionStorage.setItem("smriticare-welcome", "seen");
     } catch {}
-    const timer = setTimeout(() => setShow(false), 2800);
+    const timer = setTimeout(() => setShow(false), 2900);
     return () => clearTimeout(timer);
   }, [show]);
-  return (
-    <SiteLoader
-      show={show && !data.settings.motion}
-      onSkip={() => setShow(false)}
-    />
-  );
+  return <PremiumSiteLoader show={show} onSkip={() => setShow(false)} />;
 }
 function RouteTitle() {
   const location = useLocation();
@@ -90,6 +84,7 @@ function Application() {
             "how-it-works",
             "games-preview",
             "family-connection",
+            "progress-showcase",
             "pricing",
             "memory-garden",
             "accessibility",
@@ -135,7 +130,7 @@ function Application() {
         </Routes>
         <ModalHost />
         <ToastHost />
-        <PremiumSiteLoader />
+        <LoaderGate />
       </HashRouter>
     </MotionConfig>
   );
